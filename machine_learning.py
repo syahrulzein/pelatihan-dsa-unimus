@@ -177,13 +177,12 @@ def ml_model():
     f1 = f1_score(y_test, y_pred)
     roc_auc = roc_auc_score(y_test, model.predict_proba(X_test)[:,1])
 
-    col1, col2 = st.columns([2,2])
+    col1, col2 = st.columns([6,4])
     with col1:
-        st.write('**Confusion Matrix**')
         cm = confusion_matrix(y_test, y_pred)
-        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=model.classes_)
-        disp.plot(cmap='Blues')
-        st.pyplot(disp.figure_)
+        fig = px.imshow(cm, text_auto=True, aspect="auto", title='Confusion Matrix', 
+                        labels={'x':'Predicted Label', 'y':'True Label'})
+        st.plotly_chart(fig, use_container_width=True)
 
     with col2:
         col1, col2 = st.columns(2)
