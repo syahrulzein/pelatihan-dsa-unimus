@@ -180,8 +180,12 @@ def ml_model():
     col1, col2 = st.columns([6,4])
     with col1:
         cm = confusion_matrix(y_test, y_pred)
-        fig = px.imshow(cm, text_auto=True, aspect="auto", title='Confusion Matrix', 
-                        labels={'x':'Predicted Label', 'y':'True Label'})
+        labels = model.classes_
+        cm_df = pd.DataFrame(cm, index=labels, columns=labels)
+        fig = px.imshow(cm_df,text_auto=True, color_continuous_scale="Blues",
+            labels=dict(x="Predicted", y="Actual"), aspect="auto")
+        fig.update_layout(title="Confusion Matrix", xaxis_title="Predicted Label",
+            yaxis_title="Actual Label", height=400, width=400)
         st.plotly_chart(fig, use_container_width=True)
 
     with col2:
