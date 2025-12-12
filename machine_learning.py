@@ -53,7 +53,7 @@ def ml_model():
     with col1:
     #7.a Correlation Heatmap
         st.write('**Correlation Heatmap**')
-        corr = df_select[numbers].corr()
+        corr = df_select[numbers].corr().round(2)
         fig = px.imshow(corr, text_auto=True, aspect="auto", title='Correlation Heatmap')
         st.plotly_chart(fig, use_container_width=True)
     
