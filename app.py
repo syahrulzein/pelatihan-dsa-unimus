@@ -26,3 +26,6 @@ with tab4:
     import prediction
     prediction.prediction_app()
 
+with tab5:
+    import kontak
+    kontak.contact_me()
